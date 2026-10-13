@@ -1,0 +1,207 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "creationInfo": {
+    "created": "2006-08-14T02:34:56Z",
+    "creators": [
+      "Tool: example SPDX document only",
+      "Organization: Red Hat"
+    ],
+    "comment": "SBOM generation context: build."
+  },
+  "name": "rhel-bootc-9.6-1747000000-x86_64-qcow2-buildroot",
+  "documentNamespace": "https://www.redhat.com/rhel-bootc-9.6-1747000000-x86_64-qcow2-buildroot.spdx.json",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-buildroot",
+      "name": "rhel-bootc-9.6-1747000000-x86_64-qcow2-buildroot",
+      "versionInfo": "9.6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "OPERATING_SYSTEM",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/rhel-bootc-9.6-1747000000-x86_64-qcow2-buildroot@9.6?arch=x86_64"
+        }
+      ],
+      "description": "Build environment used to assemble rhel-bootc-9.6-1747000000-x86_64-qcow2; build tools only, not shipped in the image."
+    },
+    {
+      "SPDXID": "SPDXRef-noarch-osbuild",
+      "name": "osbuild",
+      "versionInfo": "146-1.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "osbuild-146-1.el9.noarch.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/osbuild@146-1.el9?arch=noarch&repository_id=rhel-9-for-x86_64-appstream-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6fba905d21e687307105751e16ccdfb0002da4f3974751204f184f1ae5841301"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-osbuild",
+      "name": "osbuild",
+      "versionInfo": "146-1.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "osbuild-146-1.el9.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/osbuild@146-1.el9?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "25d086fe2791c396b91fcf8f45b92444c98ad5fe9c049959fb9b9f27f250a75b"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-xorriso",
+      "name": "xorriso",
+      "versionInfo": "1.5.4-5.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "xorriso-1.5.4-5.el9.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/xorriso@1.5.4-5.el9?arch=x86_64&repository_id=rhel-9-for-x86_64-appstream-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fe14b537079e355a6dd54dfd8f8d30bfbea162690ddb9d4bc76229b109bd7097"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-libisoburn",
+      "name": "libisoburn",
+      "versionInfo": "1.5.4-5.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "libisoburn-1.5.4-5.el9.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/libisoburn@1.5.4-5.el9?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0fe723fd82faaf6676a33bb845a42cf0e1c46d892c479309936262a072fadc0c"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-bash",
+      "name": "bash",
+      "versionInfo": "5.1.8-9.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "bash-5.1.8-9.el9.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/bash@5.1.8-9.el9?arch=x86_64&repository_id=rhel-9-for-x86_64-baseos-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "eab8a4adfc7a97760759368707227bfd33d415e87a89c49c18cd6bb73e6c2a56"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-bash",
+      "name": "bash",
+      "versionInfo": "5.1.8-9.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "bash-5.1.8-9.el9.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/bash@5.1.8-9.el9?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cacc12575cb12e2d769a7f52cb2a56f476de1e704e267ffbb4bd0bfa0a24c8ae"
+        }
+      ]
+    }
+  ],
+  "files": [],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-buildroot"
+    },
+    {
+      "spdxElementId": "SPDXRef-buildroot",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-noarch-osbuild"
+    },
+    {
+      "spdxElementId": "SPDXRef-noarch-osbuild",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-osbuild"
+    },
+    {
+      "spdxElementId": "SPDXRef-buildroot",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-xorriso"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-xorriso",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-libisoburn"
+    },
+    {
+      "spdxElementId": "SPDXRef-buildroot",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-bash"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-bash",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-bash"
+    }
+  ]
+}

@@ -861,6 +861,264 @@ Bundled components declared in the spec are distinct from:
 - **Components discovered by scanning** an unpacked source tree (for example with Syft), which
   are nested under the relevant source archive.
 
+#### Disk Image
+
+!!! note "Proposal"
+    This section is a proposal under review. Items marked **Open question** need a decision from Red Hat Product
+    Security before they become normative.
+
+A disk image is a single bootable or installable artifact (for example a qcow2, raw, vmdk, vhd, ami, or tar
+image, or an installer ISO) that contains one or more filesystems with installed software. Unlike a container image,
+a disk image has no native registry identity: it is a file, identified by its checksum. This section applies to disk
+images built by Red Hat (for example with image-builder/osbuild) regardless of how they are distributed.
+
+Complete examples: [`sbom/examples/disk_image/`](https://github.com/RedHatProductSecurity/security-data-guidelines/tree/main/sbom/examples/disk_image).
+
+##### Disk image package
+
+The SBOM document must _DESCRIBE_ exactly one package that represents the disk image artifact itself:
+
+=== "SPDX 2.3"
+
+    ```json
+    {
+      "SPDXID": "SPDXRef-disk-image",
+      "name": "rhel-9.6-x86_64-kvm",// (1)!
+      "versionInfo": "9.6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "rhel-9.6-x86_64-kvm.qcow2",// (2)!
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "OPERATING_SYSTEM",// (3)!
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/rhel-9.6-x86_64-kvm@9.6?arch=x86_64&checksum=sha256:9f3c...&download_url=https://access.redhat.com/downloads/content/rhel/rhel-9.6-x86_64-kvm.qcow2"// (4)!
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9f3c..."// (5)!
+        }
+      ]
+    }
+    ```
+
+    1. A descriptive name of the image, without the file extension.
+
+    2. The file name of the final artifact as delivered.
+
+    3. `OPERATING_SYSTEM` for any image that contains a bootable or installable operating system.
+
+    4. See [purl identifiers](#disk-image-purl) below.
+
+    5. SHA256 of the final artifact file exactly as delivered (after compression, if the delivered file is compressed).
+
+[`checksums`](https://spdx.github.io/spdx-spec/v2.3/package-information/#710-package-checksum-field)
+:   The disk image package must include the SHA256 checksum of the final artifact file. The checksum must be computed
+    after the artifact is fully assembled (and compressed, if applicable), so it can only be added at build time, not
+    when the SBOM is generated ahead of the build from a manifest. An SBOM without this checksum must not be published
+    as a release-time SBOM.
+
+`packageFileName`
+:   Must be set to the file name of the delivered artifact.
+
+`primaryPackagePurpose`
+:   Must be `OPERATING_SYSTEM` for images containing an operating system.
+
+`supplier`, `versionInfo`
+:   As for any other component: `Organization: Red Hat` and the most granular version of the image (for example the
+    OS minor version plus a build or compose identifier).
+
+license information
+:   Should be `NOASSERTION`; licenses belong to the contained components.
+
+<a id="disk-image-purl"></a>purl identifiers
+:   There is no purl type for disk images. Disk images must use a [`generic` purl](./purl.md#generic-components)
+    whose name is the image name, with the `arch` qualifier, a `checksum` qualifier equal to the SHA256 above, and a
+    `download_url` qualifier pointing to where the artifact is published. When the image is also distributed as an
+    OCI artifact in a container registry, the package should additionally carry an `oci` purl for that artifact (see
+    [Distribution through a container registry](#distribution-through-a-container-registry)).
+
+    **Open question:** a build-time SBOM does not know the final `download_url`. Should build-time SBOMs omit the
+    qualifier (relaxing the generic purl rule) and have it added at release time, or should the build use a
+    placeholder?
+
+##### Installed content
+
+All RPMs installed in the image must be listed as packages following the [RPM](#rpm) rules (purl with
+`repository_id`, SHA256 checksum, `packageFileName`, SRPM linked with `GENERATED_FROM`), and must be linked to the
+package that represents the filesystem they are installed in with `CONTAINS`. For a single-OS image, that is the disk
+image package itself:
+
+=== "SPDX 2.3"
+
+    ```json
+    {
+      "relationships": [
+        {
+          "spdxElementId": "SPDXRef-DOCUMENT",
+          "relationshipType": "DESCRIBES",
+          "relatedSpdxElement": "SPDXRef-disk-image"
+        },
+        {
+          "spdxElementId": "SPDXRef-disk-image",
+          "relationshipType": "CONTAINS",
+          "relatedSpdxElement": "SPDXRef-x86-64-openssl-libs"
+        },
+        {
+          "spdxElementId": "SPDXRef-x86-64-openssl-libs",
+          "relationshipType": "GENERATED_FROM",
+          "relatedSpdxElement": "SPDXRef-SRPM-openssl"
+        }
+      ]
+    }
+    ```
+
+Only content that is actually present in the delivered image may be linked with `CONTAINS`. Packages that were
+present only in the build environment must not be listed in the image SBOM (see
+[Build environment](#build-environment)). Software installed outside of RPM (for example firmware blobs or files
+written by the build) should be listed as separate packages where it can be identified.
+
+##### Multiple filesystems
+
+Partitions of a single installed OS (for example `/`, `/boot`, `/boot/efi`) are populated from one package set and
+should not be modelled separately; the RPMs are contained directly by the disk image package.
+
+When an image contains filesystems with _independent_ content sets, each filesystem must be represented as its own
+package, contained by the disk image package, and each RPM must be contained by the filesystem package(s) it is
+installed in. The typical case is an installer ISO, which contains the installer runtime environment (which runs
+during installation but is never installed on the target) and the payload (which is installed onto the target):
+
+```
+rhel-9.6-x86_64-dvd (OPERATING_SYSTEM, sha256 of the .iso)
+├── CONTAINS rhel-9.6-x86_64-dvd-installer-environment (INSTALL, sha256 of images/install.img)
+│   ├── CONTAINS anaconda-core, kernel-core, bash, ...
+├── CONTAINS rhel-9.6-x86_64-dvd-payload (OPERATING_SYSTEM)
+│   ├── CONTAINS kernel-core, openssl-libs, bash, ...
+└── BUILD_TOOL_OF ← DocumentRef-buildroot:SPDXRef-buildroot   (separate SBOM)
+```
+
+- Filesystem packages must set `primaryPackagePurpose` to `INSTALL` for installer runtime environments and to
+  `OPERATING_SYSTEM` for content installed onto the target.
+- When the filesystem exists as a file inside the image (for example `images/install.img`), the filesystem package
+  should set `packageFileName` to its path and include its SHA256 checksum.
+- An RPM that is present in more than one filesystem (same NEVRA and checksum) must be listed once and contained by
+  each filesystem package; it must not be duplicated.
+- All filesystems of one deliverable must be described in a single SBOM document, so vulnerability tooling sees the
+  complete content of the artifact.
+
+**Open question:** are vulnerabilities in the installer environment in scope for Red Hat VEX statements for the
+image, or should installer-only components be scoped differently (for example by a different relationship)?
+
+##### Build environment
+
+Packages used only to build the image (the build root: osbuild, xorriso, dracut, and so on) must not appear in the
+image SBOM. They must be described in a separate SBOM document, referenced from the image SBOM through
+`externalDocumentRefs`, with a `BUILD_TOOL_OF` relationship from the root package of the build environment SBOM to
+the disk image package:
+
+=== "SPDX 2.3"
+
+    ```json
+    {
+      "externalDocumentRefs": [
+        {
+          "externalDocumentId": "DocumentRef-buildroot",
+          "spdxDocument": "https://www.redhat.com/rhel-9.6-x86_64-kvm-buildroot.spdx.json",
+          "checksum": {
+            "algorithm": "SHA1",
+            "checksumValue": "1d6b..."
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "spdxElementId": "DocumentRef-buildroot:SPDXRef-buildroot",
+          "relationshipType": "BUILD_TOOL_OF",
+          "relatedSpdxElement": "SPDXRef-disk-image"
+        }
+      ]
+    }
+    ```
+
+Keeping the build environment in a separate document prevents vulnerability scanners, which generally ignore
+relationship types, from reporting build-only packages as shipped content.
+
+##### Disk images built from a container image
+
+Image mode (bootc) disk images are produced by converting a bootc container image into a disk image. The container
+image already has its own SBOM. The disk image SBOM must nevertheless be self-contained:
+
+- the disk image package must be described as above, with its own SHA256 checksum, `packageFileName`, and purl;
+- all packages installed in the container image must be listed inline in the disk image SBOM and linked to the disk
+  image package with `CONTAINS`, following the same [RPM](#rpm) rules (purl, checksum, SRPM with `GENERATED_FROM`);
+- content added by the disk build itself, if any (for example a bootloader installed outside the container's
+  content), must be listed and contained by the disk image package as well;
+- the container image SBOM should additionally be referenced in `externalDocumentRefs`, with a `GENERATED_FROM`
+  relationship from the disk image package to the container image package in that document, to record provenance;
+- the build environment is referenced as described above.
+
+Listing the content inline is required because vulnerability tooling does not follow `externalDocumentRefs`: in
+testing, Trusted Profile Analyzer (Trustify), Grype, and Trivy all ignored packages that were only reachable through an
+external document reference. A disk image SBOM that only links to the container SBOM would therefore appear empty to
+scanners.
+
+=== "SPDX 2.3"
+
+    ```json
+    {
+      "relationships": [
+        {
+          "spdxElementId": "SPDXRef-disk-image",
+          "relationshipType": "CONTAINS",
+          "relatedSpdxElement": "SPDXRef-x86-64-openssl-libs"
+        },
+        {
+          "spdxElementId": "SPDXRef-disk-image",
+          "relationshipType": "GENERATED_FROM",
+          "relatedSpdxElement": "DocumentRef-container:SPDXRef-image"
+        }
+      ]
+    }
+    ```
+
+##### Distribution through a container registry
+
+Disk images may be pushed to a container registry as OCI artifacts, where the disk file is a blob in an artifact
+manifest. This is a distribution channel; it does not change what the SBOM describes. The SBOM still describes the
+disk image as defined above; no additional wrapper package for the OCI artifact is required. The disk image package:
+
+- should carry an additional `oci` purl that identifies the artifact manifest, for example
+  `pkg:oci/rhel-kvm@sha256%3A<manifest digest>?repository_url=registry.redhat.io/rhel9/rhel-kvm&tag=9.6`;
+- keeps the SHA256 checksum of the disk file itself (which equals the digest of the disk blob in the artifact
+  manifest, not the manifest digest);
+- may be attached to the artifact as an SBOM attestation or referrer like any container image SBOM.
+
+**Open question:** the `oci` purl differs in type from the `generic` purl, which conflicts with the rule that
+multiple purls on one package may differ only in their qualifiers. Is this exception acceptable for disk images, or
+should the OCI artifact be a separate package (for example with `DISTRIBUTION_ARTIFACT` or `CONTAINS`) that is
+_DESCRIBED_ alongside the disk image?
+
+##### CISA minimum elements
+
+The rules above, together with the [Document Structure](#document-structure) rules, cover the
+[CISA 2026 Minimum Elements for an SBOM](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom)
+for disk images:
+
+| CISA element | Where it is satisfied |
+|---|---|
+| SBOM author, tool name, timestamp | `creationInfo.creators`, `creationInfo.created` |
+| Generation context | `creationInfo.comment` (for example `SBOM generation context: build.`) |
+| Component name, version, producer | `name`, `versionInfo`, `supplier` of every package |
+| Software identifiers | purl on every package (`generic`/`oci` for the image, `rpm` for content) |
+| Component hash | SHA256 of the final artifact on the disk image package; SHA256 on every RPM |
+| License | `licenseConcluded` on contained components |
+| Dependency relationships | `CONTAINS` (image → filesystem → RPM), `GENERATED_FROM` (RPM → SRPM, disk → container) |
+| Coverage of build tools | separate build environment SBOM linked with `BUILD_TOOL_OF` |
+
 #### Product
 
 Individual components such as packages and container images are almost always provided as part of a specific product.

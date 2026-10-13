@@ -282,15 +282,18 @@ bdisk = disk_pkg(
     "OPERATING_SYSTEM",
     f"{CDN}/rhel-bootc-9.6-1747000000-x86_64.qcow2",
 )
-rels = [
-    rel("SPDXRef-DOCUMENT", "DESCRIBES", "SPDXRef-disk-image"),
+# Container content is listed inline (scanners ignore externalDocumentRefs);
+# the link to the container SBOM is kept for provenance.
+bpkgs, rels = [bdisk], [rel("SPDXRef-DOCUMENT", "DESCRIBES", "SPDXRef-disk-image")]
+with_rpms("SPDXRef-disk-image", ["kernel-core", "openssl-libs", "bash"], bpkgs, rels)
+rels += [
     rel("SPDXRef-disk-image", "GENERATED_FROM", "DocumentRef-container:SPDXRef-image"),
     rel("DocumentRef-buildroot:SPDXRef-buildroot", "BUILD_TOOL_OF", "SPDXRef-disk-image"),
 ]
 write(
     doc(
         BNAME,
-        [bdisk],
+        bpkgs,
         rels,
         [
             ext_ref("DocumentRef-container", cdoc, c_sha),

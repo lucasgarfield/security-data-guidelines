@@ -53,6 +53,141 @@
           "checksumValue": "42a456d01ce6e40e3dc5167f35ce5e7781884b27ea046083da5e1cb757496ca7"
         }
       ]
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-kernel-core",
+      "name": "kernel-core",
+      "versionInfo": "5.14.0-570.12.1.el9_6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "kernel-core-5.14.0-570.12.1.el9_6.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/kernel-core@5.14.0-570.12.1.el9_6?arch=x86_64&repository_id=rhel-9-for-x86_64-baseos-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "74736ab9d90b813481a7036785ad3df98d0ca408eac9e4c64119b2d971d36c5f"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-kernel",
+      "name": "kernel",
+      "versionInfo": "5.14.0-570.12.1.el9_6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "kernel-5.14.0-570.12.1.el9_6.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/kernel@5.14.0-570.12.1.el9_6?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d2fb3d7d11c1768e249b1aee72802ca72f0624cfa63eb415bdd7e808c07ac217"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-openssl-libs",
+      "name": "openssl-libs",
+      "versionInfo": "3.2.2-6.el9_5.1",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "openssl-libs-3.2.2-6.el9_5.1.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/openssl-libs@3.2.2-6.el9_5.1?arch=x86_64&repository_id=rhel-9-for-x86_64-baseos-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "60e7890fc3517f8b08eeccb6dd82c9b65857d2a720fb066f5aef50020610e2b3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-openssl",
+      "name": "openssl",
+      "versionInfo": "3.2.2-6.el9_5.1",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "openssl-3.2.2-6.el9_5.1.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/openssl@3.2.2-6.el9_5.1?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7e328cfa1f2cbca8256b22992017d54f9e5bf05edfca2bf795050b63b5665f35"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-bash",
+      "name": "bash",
+      "versionInfo": "5.1.8-9.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "bash-5.1.8-9.el9.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/bash@5.1.8-9.el9?arch=x86_64&repository_id=rhel-9-for-x86_64-baseos-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "eab8a4adfc7a97760759368707227bfd33d415e87a89c49c18cd6bb73e6c2a56"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-bash",
+      "name": "bash",
+      "versionInfo": "5.1.8-9.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "bash-5.1.8-9.el9.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/bash@5.1.8-9.el9?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cacc12575cb12e2d769a7f52cb2a56f476de1e704e267ffbb4bd0bfa0a24c8ae"
+        }
+      ]
     }
   ],
   "files": [],
@@ -61,6 +196,36 @@
       "spdxElementId": "SPDXRef-DOCUMENT",
       "relationshipType": "DESCRIBES",
       "relatedSpdxElement": "SPDXRef-disk-image"
+    },
+    {
+      "spdxElementId": "SPDXRef-disk-image",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-kernel-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-kernel-core",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-kernel"
+    },
+    {
+      "spdxElementId": "SPDXRef-disk-image",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-openssl-libs"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-openssl-libs",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-openssl"
+    },
+    {
+      "spdxElementId": "SPDXRef-disk-image",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-bash"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-bash",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-bash"
     },
     {
       "spdxElementId": "SPDXRef-disk-image",

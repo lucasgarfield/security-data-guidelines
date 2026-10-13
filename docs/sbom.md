@@ -1050,28 +1050,40 @@ relationship types, from reporting build-only packages as shipped content.
 ##### Disk images built from a container image
 
 Image mode (bootc) disk images are produced by converting a bootc container image into a disk image. The container
-image already has its own SBOM. The disk image SBOM should not copy the container's content. Instead:
+image already has its own SBOM. The disk image SBOM must nevertheless be self-contained:
 
 - the disk image package must be described as above, with its own SHA256 checksum, `packageFileName`, and purl;
-- the container image SBOM must be referenced in `externalDocumentRefs`, and the disk image package must have a
-  `GENERATED_FROM` relationship to the container image package in that document;
+- all packages installed in the container image must be listed inline in the disk image SBOM and linked to the disk
+  image package with `CONTAINS`, following the same [RPM](#rpm) rules (purl, checksum, SRPM with `GENERATED_FROM`);
 - content added by the disk build itself, if any (for example a bootloader installed outside the container's
-  content), must be listed and contained by the disk image package;
+  content), must be listed and contained by the disk image package as well;
+- the container image SBOM should additionally be referenced in `externalDocumentRefs`, with a `GENERATED_FROM`
+  relationship from the disk image package to the container image package in that document, to record provenance;
 - the build environment is referenced as described above.
+
+Listing the content inline is required because vulnerability tooling does not follow `externalDocumentRefs`: in
+testing, Trusted Profile Analyzer (Trustify), Grype, and Trivy all ignored packages that were only reachable through an
+external document reference. A disk image SBOM that only links to the container SBOM would therefore appear empty to
+scanners.
 
 === "SPDX 2.3"
 
     ```json
     {
-      "spdxElementId": "SPDXRef-disk-image",
-      "relationshipType": "GENERATED_FROM",
-      "relatedSpdxElement": "DocumentRef-container:SPDXRef-image"
+      "relationships": [
+        {
+          "spdxElementId": "SPDXRef-disk-image",
+          "relationshipType": "CONTAINS",
+          "relatedSpdxElement": "SPDXRef-x86-64-openssl-libs"
+        },
+        {
+          "spdxElementId": "SPDXRef-disk-image",
+          "relationshipType": "GENERATED_FROM",
+          "relatedSpdxElement": "DocumentRef-container:SPDXRef-image"
+        }
+      ]
     }
     ```
-
-**Open question:** most scanners, as well as Trusted Profile Analyzer, do not follow `externalDocumentRefs`. Until
-they do, is copying the container's packages into the disk image SBOM (with `CONTAINS`) an acceptable interim
-alternative, and should the referenced container SBOM be resolvable through the `documentNamespace`?
 
 ##### Distribution through a container registry
 

@@ -1,0 +1,330 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "creationInfo": {
+    "created": "2006-08-14T02:34:56Z",
+    "creators": [
+      "Tool: example SPDX document only",
+      "Organization: Red Hat"
+    ],
+    "comment": "SBOM generation context: build."
+  },
+  "name": "rhel-9.6-x86_64-dvd",
+  "documentNamespace": "https://www.redhat.com/rhel-9.6-x86_64-dvd.spdx.json",
+  "externalDocumentRefs": [
+    {
+      "externalDocumentId": "DocumentRef-buildroot",
+      "spdxDocument": "https://www.redhat.com/rhel-9.6-x86_64-dvd-buildroot.spdx.json",
+      "checksum": {
+        "algorithm": "SHA1",
+        "checksumValue": "e3f7860df69da48487067ed840059988e36c8016"
+      }
+    }
+  ],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-disk-image",
+      "name": "rhel-9.6-x86_64-dvd",
+      "versionInfo": "9.6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "rhel-9.6-x86_64-dvd.iso",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "OPERATING_SYSTEM",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/rhel-9.6-x86_64-dvd@9.6?arch=x86_64&checksum=sha256:cd1a70ab5e952c8c2ec4c5e28cd834257b98feddc7b0921925697d593da74d56&download_url=https://access.redhat.com/downloads/content/rhel/rhel-9.6-x86_64-dvd.iso"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cd1a70ab5e952c8c2ec4c5e28cd834257b98feddc7b0921925697d593da74d56"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-fs-installer",
+      "name": "rhel-9.6-x86_64-dvd-installer-environment",
+      "versionInfo": "9.6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "images/install.img",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "INSTALL",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d1b199981ac22547852f5a9e8b8a114d685999db07dde47ade73e37f2521a06f"
+        }
+      ],
+      "description": "Anaconda installer runtime (squashfs). Runs during installation; not installed on the target system."
+    },
+    {
+      "SPDXID": "SPDXRef-fs-payload",
+      "name": "rhel-9.6-x86_64-dvd-payload",
+      "versionInfo": "9.6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "OPERATING_SYSTEM",
+      "description": "Content installed onto the target system by the installer."
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-anaconda-core",
+      "name": "anaconda-core",
+      "versionInfo": "34.25.5.17-1.el9_6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "anaconda-core-34.25.5.17-1.el9_6.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/anaconda-core@34.25.5.17-1.el9_6?arch=x86_64&repository_id=rhel-9-for-x86_64-appstream-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5e1fcdf9b580442fa8e4bc10d74c58006e8f61d73e55f461b9baa9dac6273269"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-anaconda",
+      "name": "anaconda",
+      "versionInfo": "34.25.5.17-1.el9_6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "anaconda-34.25.5.17-1.el9_6.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/anaconda@34.25.5.17-1.el9_6?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "56e231c69c1d8f831a2df4906c57725781087fe8ee34f1289ec16ae570055162"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-kernel-core",
+      "name": "kernel-core",
+      "versionInfo": "5.14.0-570.12.1.el9_6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "kernel-core-5.14.0-570.12.1.el9_6.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/kernel-core@5.14.0-570.12.1.el9_6?arch=x86_64&repository_id=rhel-9-for-x86_64-baseos-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "74736ab9d90b813481a7036785ad3df98d0ca408eac9e4c64119b2d971d36c5f"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-kernel",
+      "name": "kernel",
+      "versionInfo": "5.14.0-570.12.1.el9_6",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "kernel-5.14.0-570.12.1.el9_6.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/kernel@5.14.0-570.12.1.el9_6?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d2fb3d7d11c1768e249b1aee72802ca72f0624cfa63eb415bdd7e808c07ac217"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-bash",
+      "name": "bash",
+      "versionInfo": "5.1.8-9.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "bash-5.1.8-9.el9.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/bash@5.1.8-9.el9?arch=x86_64&repository_id=rhel-9-for-x86_64-baseos-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "eab8a4adfc7a97760759368707227bfd33d415e87a89c49c18cd6bb73e6c2a56"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-bash",
+      "name": "bash",
+      "versionInfo": "5.1.8-9.el9",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "bash-5.1.8-9.el9.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/bash@5.1.8-9.el9?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cacc12575cb12e2d769a7f52cb2a56f476de1e704e267ffbb4bd0bfa0a24c8ae"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-x86-64-openssl-libs",
+      "name": "openssl-libs",
+      "versionInfo": "3.2.2-6.el9_5.1",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "openssl-libs-3.2.2-6.el9_5.1.x86_64.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/openssl-libs@3.2.2-6.el9_5.1?arch=x86_64&repository_id=rhel-9-for-x86_64-baseos-rpms"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "60e7890fc3517f8b08eeccb6dd82c9b65857d2a720fb066f5aef50020610e2b3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-SRPM-openssl",
+      "name": "openssl",
+      "versionInfo": "3.2.2-6.el9_5.1",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "openssl-3.2.2-6.el9_5.1.src.rpm",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "SOURCE",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:rpm/redhat/openssl@3.2.2-6.el9_5.1?arch=src"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7e328cfa1f2cbca8256b22992017d54f9e5bf05edfca2bf795050b63b5665f35"
+        }
+      ]
+    }
+  ],
+  "files": [],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-disk-image"
+    },
+    {
+      "spdxElementId": "SPDXRef-disk-image",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-fs-installer"
+    },
+    {
+      "spdxElementId": "SPDXRef-disk-image",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-fs-payload"
+    },
+    {
+      "spdxElementId": "SPDXRef-fs-installer",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-anaconda-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-anaconda-core",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-anaconda"
+    },
+    {
+      "spdxElementId": "SPDXRef-fs-installer",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-kernel-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-kernel-core",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-kernel"
+    },
+    {
+      "spdxElementId": "SPDXRef-fs-installer",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-bash"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-bash",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-bash"
+    },
+    {
+      "spdxElementId": "SPDXRef-fs-payload",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-kernel-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-fs-payload",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-openssl-libs"
+    },
+    {
+      "spdxElementId": "SPDXRef-x86-64-openssl-libs",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-SRPM-openssl"
+    },
+    {
+      "spdxElementId": "SPDXRef-fs-payload",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-x86-64-bash"
+    },
+    {
+      "spdxElementId": "DocumentRef-buildroot:SPDXRef-buildroot",
+      "relationshipType": "BUILD_TOOL_OF",
+      "relatedSpdxElement": "SPDXRef-disk-image"
+    }
+  ]
+}

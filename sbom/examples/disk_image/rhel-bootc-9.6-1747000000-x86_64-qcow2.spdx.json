@@ -1,0 +1,76 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "creationInfo": {
+    "created": "2006-08-14T02:34:56Z",
+    "creators": [
+      "Tool: example SPDX document only",
+      "Organization: Red Hat"
+    ],
+    "comment": "SBOM generation context: build."
+  },
+  "name": "rhel-bootc-9.6-1747000000-x86_64-qcow2",
+  "documentNamespace": "https://www.redhat.com/rhel-bootc-9.6-1747000000-x86_64-qcow2.spdx.json",
+  "externalDocumentRefs": [
+    {
+      "externalDocumentId": "DocumentRef-container",
+      "spdxDocument": "https://www.redhat.com/rhel-bootc-container-9.6-1747000000_amd64.spdx.json",
+      "checksum": {
+        "algorithm": "SHA1",
+        "checksumValue": "c70520f3c0215e172f4e87a391a852fbdef2a6ac"
+      }
+    },
+    {
+      "externalDocumentId": "DocumentRef-buildroot",
+      "spdxDocument": "https://www.redhat.com/rhel-bootc-9.6-1747000000-x86_64-qcow2-buildroot.spdx.json",
+      "checksum": {
+        "algorithm": "SHA1",
+        "checksumValue": "7c9e834c91c1eda2949ff2bc71044135195ce2f5"
+      }
+    }
+  ],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-disk-image",
+      "name": "rhel-bootc-9.6-1747000000-x86_64-qcow2",
+      "versionInfo": "9.6-1747000000",
+      "supplier": "Organization: Red Hat",
+      "downloadLocation": "NOASSERTION",
+      "packageFileName": "rhel-bootc-9.6-1747000000-x86_64.qcow2",
+      "licenseConcluded": "NOASSERTION",
+      "primaryPackagePurpose": "OPERATING_SYSTEM",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/rhel-bootc-9.6-1747000000-x86_64-qcow2@9.6-1747000000?arch=x86_64&checksum=sha256:42a456d01ce6e40e3dc5167f35ce5e7781884b27ea046083da5e1cb757496ca7&download_url=https://access.redhat.com/downloads/content/rhel/rhel-bootc-9.6-1747000000-x86_64.qcow2"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "42a456d01ce6e40e3dc5167f35ce5e7781884b27ea046083da5e1cb757496ca7"
+        }
+      ]
+    }
+  ],
+  "files": [],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-disk-image"
+    },
+    {
+      "spdxElementId": "SPDXRef-disk-image",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "DocumentRef-container:SPDXRef-image"
+    },
+    {
+      "spdxElementId": "DocumentRef-buildroot:SPDXRef-buildroot",
+      "relationshipType": "BUILD_TOOL_OF",
+      "relatedSpdxElement": "SPDXRef-disk-image"
+    }
+  ]
+}
